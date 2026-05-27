@@ -36,12 +36,6 @@ module.exports = {
       }
     },
     {
-      method: "fs.link",
-      params: {
-        venv: "app/env"
-      }
-    },
-    {
       method: "notify",
       params: {
         html: "Install complete. Click Start Music or Start SFX to launch Stable Audio 3 Small."

@@ -9,6 +9,7 @@ module.exports = {
     let installing = await kernel.running(__dirname, "install.js")
     let installed = await kernel.exists(__dirname, "app", "env")
     let running = await kernel.running(__dirname, "start.js")
+    let link = await kernel.running(__dirname, "link.js")
     let supportsMedium = kernel.gpu === "nvidia" && (kernel.platform === "win32" || kernel.platform === "linux")
 
     if (installing) {
@@ -48,6 +49,13 @@ module.exports = {
             href: "start.js"
           }]
         }
+      } else if (link) {
+        return [{
+          default: true,
+          icon: 'fa-solid fa-terminal',
+          text: "Deduplicating",
+          href: "link.js",
+        }]
       } else {
         let menu = [{
           icon: "fa-solid fa-music",
@@ -91,9 +99,14 @@ module.exports = {
           text: "Install",
           href: "install.js"
         }, {
+          icon: "fa-solid fa-file-zipper",
+          text: "<div><strong>Save Disk Space</strong><div>Deduplicates redundant library files</div></div>",
+          href: "link.js",
+        }, {
           icon: "fa-regular fa-circle-xmark",
           text: "Reset",
-          href: "reset.js"
+          href: "reset.js",
+          confirm: "Are you sure you wish to reset the app?"
         })
 
         return menu
