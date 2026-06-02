@@ -27,6 +27,18 @@ module.exports = {
           _: ["uv", "sync", "--extra", "ui", "--active"]
         }
       }
+    },
+    {
+      when: "{{gpu === 'nvidia' && (platform === 'win32' || platform === 'linux')}}",
+      method: "script.start",
+      params: {
+        uri: "torch.js",
+        params: {
+          venv: "env",
+          path: "app",
+          flashattention: true
+        }
+      }
     }
   ]
 }
